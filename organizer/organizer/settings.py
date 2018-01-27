@@ -128,8 +128,9 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_HOST_USER = 'postmaster@sandboxc8fff37ef1374ee084671161d913fcd5.mailgun.org'
-EMAIL_HOST_PASSWORD = 'd923d1338aa80d14abffee687d1dd312'
-EMAIL_PORT = 587
+# Per machine defined settings to be ignored in version control system
+try:
+    from .local import *
+except ImportError as e:
+    if "local" not in str(e):
+        raise e
